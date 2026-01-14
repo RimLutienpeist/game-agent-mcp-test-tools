@@ -7,6 +7,7 @@
 import sys
 import os
 import asyncio
+import argparse
 from pathlib import Path
 
 # 获取脚本所在目录并切换到项目根目录
@@ -23,8 +24,14 @@ os.environ['AUTO_REMOVE_BACKGROUND'] = 'false'
 # 导入函数
 from mcp_server import _generate_game_asset_internal
 
+# 解析命令行参数
+parser = argparse.ArgumentParser(description='生成游戏资源图像')
+parser.add_argument('subdir', nargs='?', default='yeild-test',
+                    help='工作空间路径的最后一个子目录 (默认: yeild-test)')
+args = parser.parse_args()
+
 # 工作空间路径
-workspace = 'test/temp_workspace/yeild-test'
+workspace = f'test/temp_workspace/{args.subdir}'
 
 print(f"工作空间: {workspace}")
 print(f"开始生成图像...")
