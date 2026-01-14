@@ -7,12 +7,11 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # 进入项目根目录（test 的父目录）
 cd "$SCRIPT_DIR/.."
 
-# 检查虚拟环境是否存在
-if [ ! -d "venv" ]; then
-    echo "❌ 错误：虚拟环境不存在"
-    echo "请先运行：python3 -m venv venv && venv/bin/pip install -e ."
-    exit 1
+# 检查是否在虚拟环境中（venv 或 conda）
+if [ -d "venv" ]; then
+    # 如果 venv 存在，使用 venv
+    venv/bin/python3 test/scripts/test_stage_runner.py "$@"
+else
+    # 否则使用当前环境的 Python（适用于 conda）
+    python3 test/scripts/test_stage_runner.py "$@"
 fi
-
-# 使用虚拟环境的 Python 运行测试
-venv/bin/python3 test/scripts/test_stage_runner.py "$@"
