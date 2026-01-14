@@ -1,0 +1,296 @@
+[
+    {
+        "name": "tileset_floor_empty_32.png",
+        "description": "A seamless 2D game tile of an empty floor, rendered in cute chibi pixel art style. The tile is viewed from an orthogonal top-down view with zero vanishing points and no perspective depth, completely flat 2D tilemap. The floor is a soft warm beige-tan base (#D9C7A3) with a subtle repeating pixel pattern suggesting clean stone or ceramic tiles: small 2\u20133 pixel speckles in slightly darker tan (#C3B08F) and lighter cream (#E8D9BE) scattered evenly. Add faint square tile seams: 1-pixel-wide lines forming a 2\u00d72 sub-grid inside the 32\u00d732 tile, seams in slightly darker tan (#B79F78), kept low-contrast so it doesn\u2019t overpower gameplay. Corners and all four edges must match perfectly for seamless tiling; pattern density remains consistent at edges. Features bold black outlines only where needed for tiny cracks/speckles (no heavy outlines around the tile perimeter). Flat colors, no gradients, no shadows, no lighting effects; clean edges suitable for sprite extraction. The image is fully filled by the floor texture (no extra background).",
+        "size": "32\u00d732",
+        "yield_from": null,
+        "is_background": true
+    },
+    {
+        "name": "tileset_wall_indestructible_32.png",
+        "description": "A seamless 2D game tile of an indestructible wall block, rendered in cute chibi pixel art style. Orthogonal top-down view, zero perspective depth, completely flat 2D tilemap. The tile depicts a chunky stone/brick block that visually reads as solid and permanent: a cool gray-blue palette with the main block face in medium gray-blue (#7E8FA6), darker mortar/crevice lines (#4E5C70), and small highlight pixels in pale blue-gray (#AAB8C8). The wall fills the entire 32\u00d732 tile, with an internal brick pattern: 2 rows of large bricks (each brick about 12\u201314 pixels wide, 8\u201310 pixels tall), offset like a running bond; mortar lines are 1\u20132 pixels thick. Add 3\u20135 small chips/cracks as 1-pixel notches along brick edges for texture. All four edges must tile seamlessly so that adjacent wall tiles connect with continuous brick/mortar pattern; no visible seams. Features bold black outlines on key brick boundaries (1 pixel), flat colors, no gradients, no shadows, no lighting effects. The image is fully filled by the wall texture (no extra background).",
+        "size": "32\u00d732",
+        "yield_from": null,
+        "is_background": true
+    },
+    {
+        "name": "tileset_wall_destructible_32.png",
+        "description": "A seamless 2D game tile of a destructible wall/crate, rendered in cute chibi pixel art style. Orthogonal top-down view, no perspective depth, completely flat 2D tilemap. The tile reads as breakable: a warm orange-brown wooden crate/soft brick look with clear structure. Use a base wood color (#C88A4A) with darker plank lines (#8A5A2B) and light highlight pixels (#E7B57A). The destructible block fills the 32\u00d732 tile. Depict an internal pattern of 3 vertical planks (each about 9\u201310 pixels wide) separated by 1\u20132 pixel dark lines, plus a diagonal cross-brace \u201cX\u201d made of 2-pixel-wide darker strips crossing from corners to center. Add a few small nicks: 1\u20132 pixel chips on edges. All four edges must tile seamlessly if many destructible tiles are adjacent; avoid unique corner markings that would break repetition, keep the plank seams and cross-brace aligned so repeats look intentional. Bold black outlines on the outer edges of the crate silhouette and on the cross-brace edges (1 pixel). Flat colors, no gradients, no shadows, no lighting effects. The image is fully filled by the destructible texture (no extra background).",
+        "size": "32\u00d732",
+        "yield_from": null,
+        "is_background": true
+    },
+    {
+        "name": "player_idle_down_32.png",
+        "description": "A high-quality 2D game character sprite of the Bomberman-like player, rendered in cute chibi pixel art style. The character is viewed in a direct front view (used for facing down in top-down games), with zero perspective depth, completely flat 2D sprite. The character stands centered and occupies ~80% of the 32\u00d732 frame height. Design: a round white helmet/head with a clear bold black outline (1\u20132 pixels), a small face opening/visor area in pale peach (#F2C7A5) with two simple black dot eyes spaced 4\u20135 pixels apart; no mouth. Add a small pink antenna ball on top center (ball ~4\u00d74 pixels) with a short black-outlined stem. Body: a compact suit in bright blue (#2E6BE6) with darker blue accents (#1F3F9A) at the waist and glove cuffs; mitt-like gloves in white with black outline; boots in pink-red (#E24A6A) with darker shading (#A82E47) but still flat (no gradients). Arms hang slightly outward from torso, hands near hips; legs together with slight separation line (1 pixel) between boots. Features bold black outlines, solid flat colors, no shadows, no lighting effects, no depth of field. Isolated on a solid white background (#FFFFFF).",
+        "size": "32\u00d732",
+        "yield_from": null,
+        "is_background": false
+    },
+    {
+        "name": "player_idle_up_32.png",
+        "description": "This is a partial image edit. Keep everything identical: cute chibi pixel art style, same character proportions, helmet shape, antenna ball, suit colors, gloves/boots design, bold black outlines, flat colors, identical 32\u00d732 bounding box and centering, solid white background (#FFFFFF), no shadows or lighting.\n\nThe only change: the character is viewed from a direct back view (used for facing up), so the face/eyes are not visible. The helmet shows a simple back panel detail: a centered vertical seam line (1 pixel, dark gray) and a small rectangular hatch-like detail (about 6\u00d74 pixels) on the upper-back of the helmet. The torso shows a small backpack-like bump (about 10\u00d78 pixels) centered on the upper back in blue with black outline.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "player_idle_down_32.png",
+        "is_background": false
+    },
+    {
+        "name": "player_idle_left_32.png",
+        "description": "This is a partial image edit. Keep everything identical: cute chibi pixel art style, same palette, helmet/antenna design, suit/gloves/boots, bold black outlines, flat colors, identical 32\u00d732 bounding box and centering, solid white background (#FFFFFF), no shadows or lighting.\n\nThe only change: the character is viewed strictly from a side profile facing left. Only the left side of the helmet and body is visible; the far-side arm/leg are fully hidden. The face opening becomes a side visor: a small pale peach area on the front-left of the head with a single black dot eye placed near the center of that visor. The antenna ball remains centered on top but its stem aligns with the head centerline.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "player_idle_down_32.png",
+        "is_background": false
+    },
+    {
+        "name": "player_idle_right_32.png",
+        "description": "This is a partial image edit. Keep everything identical: cute chibi pixel art style, same palette, helmet/antenna design, suit/gloves/boots, bold black outlines, flat colors, identical 32\u00d732 bounding box and centering, solid white background (#FFFFFF), no shadows or lighting.\n\nThe only change: the character is viewed strictly from a side profile facing right. Only the right side of the helmet and body is visible; the far-side arm/leg are fully hidden. The face opening becomes a side visor on the front-right with a single black dot eye centered in the visor.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "player_idle_down_32.png",
+        "is_background": false
+    },
+    {
+        "name": "player_walk_down_1_32.png",
+        "description": "This is a partial image edit. Keep everything identical: direct front view (facing down), cute chibi pixel art style, same helmet/antenna/face, same suit colors, bold black outlines, flat colors, identical 32\u00d732 bounding box and centering, solid white background (#FFFFFF), no shadows/lighting.\n\nThe only change: walking pose frame 1. The left leg is extended forward with the left boot shifted 3 pixels downward and 2 pixels left from the idle position; the right leg is slightly back with the right boot shifted 2 pixels upward. The left arm swings back: left glove shifted 2 pixels upward and 2 pixels left; the right arm swings forward: right glove shifted 2 pixels downward and 1 pixel right.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "player_idle_down_32.png",
+        "is_background": false
+    },
+    {
+        "name": "player_walk_down_2_32.png",
+        "description": "This is a partial image edit. Keep everything identical: direct front view (facing down), cute chibi pixel art style, same palette, bold outlines, flat colors, identical 32\u00d732 bounding box and centering, solid white background (#FFFFFF).\n\nThe only change: walking pose frame 2 (opposite stride). The right leg is extended forward with the right boot shifted 3 pixels downward and 2 pixels right from idle; the left leg is slightly back with the left boot shifted 2 pixels upward. The right arm swings back (right glove shifted 2 pixels upward and 2 pixels right); the left arm swings forward (left glove shifted 2 pixels downward and 1 pixel left).\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "player_idle_down_32.png",
+        "is_background": false
+    },
+    {
+        "name": "player_walk_up_1_32.png",
+        "description": "This is a partial image edit. Keep everything identical: direct back view (facing up) from `player_idle_up_32.png`, same backpack bump and helmet back details, same palette, bold black outlines, flat colors, identical 32\u00d732 bounding box and centering, solid white background (#FFFFFF).\n\nThe only change: walking pose frame 1. The left boot is extended forward (toward the top of the sprite) by shifting it 2 pixels upward; the right boot is shifted 2 pixels downward. Arms swing subtly: left glove shifts 1 pixel downward, right glove shifts 1 pixel upward.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "player_idle_up_32.png",
+        "is_background": false
+    },
+    {
+        "name": "player_walk_up_2_32.png",
+        "description": "This is a partial image edit. Keep everything identical: direct back view (facing up), same backpack/helmet back panel, cute chibi pixel art style, same palette, bold outlines, flat colors, identical 32\u00d732 bounding box and centering, solid white background (#FFFFFF).\n\nThe only change: walking pose frame 2 (opposite stride). The right boot is shifted 2 pixels upward; the left boot is shifted 2 pixels downward. Arms swing subtly opposite: right glove shifts 1 pixel downward, left glove shifts 1 pixel upward.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "player_idle_up_32.png",
+        "is_background": false
+    },
+    {
+        "name": "player_walk_left_1_32.png",
+        "description": "This is a partial image edit. Keep everything identical: strict side profile facing left from `player_idle_left_32.png`, same visor and single eye, same palette, bold outlines, flat colors, identical 32\u00d732 bounding box and centering, solid white background (#FFFFFF).\n\nThe only change: walking pose frame 1. The front (left-facing) boot is shifted 3 pixels forward (to the left) and 1 pixel downward; the rear boot is shifted 2 pixels backward (to the right) and 1 pixel upward. The front arm swings forward by shifting the visible glove 2 pixels left and 1 pixel down.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "player_idle_left_32.png",
+        "is_background": false
+    },
+    {
+        "name": "player_walk_left_2_32.png",
+        "description": "This is a partial image edit. Keep everything identical: strict side profile facing left, same visor/eye, same palette, bold outlines, flat colors, identical 32\u00d732 bounding box and centering, solid white background (#FFFFFF).\n\nThe only change: walking pose frame 2 (opposite stride). The front boot is shifted 2 pixels backward (to the right) and 1 pixel upward; the rear boot is shifted 3 pixels forward (to the left) and 1 pixel downward. The visible glove swings back by shifting it 2 pixels right and 1 pixel up.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "player_idle_left_32.png",
+        "is_background": false
+    },
+    {
+        "name": "player_walk_right_1_32.png",
+        "description": "This is a partial image edit. Keep everything identical: strict side profile facing right from `player_idle_right_32.png`, same visor and single eye, same palette, bold outlines, flat colors, identical 32\u00d732 bounding box and centering, solid white background (#FFFFFF).\n\nThe only change: walking pose frame 1. The front (right-facing) boot is shifted 3 pixels forward (to the right) and 1 pixel downward; the rear boot is shifted 2 pixels backward (to the left) and 1 pixel upward. The visible glove swings forward by shifting it 2 pixels right and 1 pixel down.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "player_idle_right_32.png",
+        "is_background": false
+    },
+    {
+        "name": "player_walk_right_2_32.png",
+        "description": "This is a partial image edit. Keep everything identical: strict side profile facing right, same visor/eye, same palette, bold outlines, flat colors, identical 32\u00d732 bounding box and centering, solid white background (#FFFFFF).\n\nThe only change: walking pose frame 2 (opposite stride). The front boot is shifted 2 pixels backward (to the left) and 1 pixel upward; the rear boot is shifted 3 pixels forward (to the right) and 1 pixel downward. The visible glove swings back by shifting it 2 pixels left and 1 pixel up.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "player_idle_right_32.png",
+        "is_background": false
+    },
+    {
+        "name": "bomb_idle_32.png",
+        "description": "A high-quality 2D game object sprite of a classic round bomb, rendered in cute chibi pixel art style. Orthogonal top-down view, completely flat 2D sprite with zero perspective depth. The bomb is centered and occupies ~70% of the 32\u00d732 frame. Shape: a near-perfect black sphere with bold black outline still visible via a slightly lighter rim (dark charcoal #2A2A2A) and inner fill (#0B0B0B). At the top center is a short fuse (about 6 pixels tall) in tan (#C9A16A) with a black outline, ending in a small red-orange cap. Add a tiny highlight cluster (2\u20133 pixels) on the upper-left of the sphere in dark gray (#3A3A3A) but keep it flat (no gradients). No shadows, no lighting effects. Clean edges for sprite extraction. Isolated on a solid white background (#FFFFFF).",
+        "size": "32\u00d732",
+        "yield_from": null,
+        "is_background": false
+    },
+    {
+        "name": "bomb_fuse_1_32.png",
+        "description": "This is a partial image edit. Keep everything identical: orthogonal top-down bomb, same sphere size/position, same palette, fuse shape and placement, bold outlines, flat colors, 32\u00d732 bounding box, solid white background (#FFFFFF).\n\nThe only change: the fuse tip shows a small spark cluster: 4\u20136 pixels around the fuse end in bright yellow (#FFD23C) and orange (#FF8A2A) with a 1-pixel black outline around the cluster silhouette. The spark extends 2\u20133 pixels to the upper-right of the fuse tip.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "bomb_idle_32.png",
+        "is_background": false
+    },
+    {
+        "name": "bomb_fuse_2_32.png",
+        "description": "This is a partial image edit. Keep everything identical: orthogonal top-down bomb, same size/position, same palette, bold outlines, flat colors, 32\u00d732 bounding box, solid white background (#FFFFFF).\n\nThe only change: the spark cluster is larger and more intense: 8\u201310 pixels total, with a brighter yellow core (#FFF06A) and orange outer pixels (#FF8A2A), extending 4 pixels to the upper-right of the fuse tip.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "bomb_idle_32.png",
+        "is_background": false
+    },
+    {
+        "name": "explosion_center_32.png",
+        "description": "A high-quality 2D game effect sprite of an explosion center tile, rendered in cute chibi pixel art style. Orthogonal top-down view, completely flat 2D sprite, zero perspective depth. The explosion fills most of the 32\u00d732 frame (~90%), centered. Shape: a rounded starburst with 8 soft spikes (cardinal spikes longer), outlined with bold black line (1\u20132 pixels). Color scheme: bright yellow core (#FFE45C) with orange mid band (#FF9B3D) and a red outer band (#E24A3A), all as solid flat regions (no gradients). Add 3\u20134 small detached embers (2\u00d72 pixels) near corners in orange with black outline. No shadows, no lighting effects. Isolated on a solid white background (#FFFFFF).",
+        "size": "32\u00d732",
+        "yield_from": null,
+        "is_background": false
+    },
+    {
+        "name": "explosion_horizontal_32.png",
+        "description": "A high-quality 2D game effect sprite of an explosion arm (horizontal segment), rendered in cute chibi pixel art style. Orthogonal top-down view, completely flat 2D sprite. The explosion segment is a horizontal flame bar centered vertically, spanning ~90% of the tile width, with rounded ends. Bold black outline (1\u20132 pixels) around the flame silhouette. Flat colors: yellow core (#FFE45C) in a long oval band, orange mid band (#FF9B3D), red outer band (#E24A3A). The center is slightly thicker (about 12 pixels tall) tapering to ~8 pixels at ends. No gradients, no shadows, no lighting effects. Isolated on solid white background (#FFFFFF).",
+        "size": "32\u00d732",
+        "yield_from": null,
+        "is_background": false
+    },
+    {
+        "name": "explosion_vertical_32.png",
+        "description": "This is a partial image edit. Keep everything identical: cute chibi pixel art style, same flame colors, outline thickness, flat colors, no shadows/lighting, same overall flame thickness profile, identical 32\u00d732 bounding box, solid white background (#FFFFFF).\n\nThe only change: the explosion segment is vertical instead of horizontal, spanning ~90% of the tile height, centered horizontally, with rounded ends. The yellow core and orange/red bands rotate accordingly.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "explosion_horizontal_32.png",
+        "is_background": false
+    },
+    {
+        "name": "explosion_end_up_32.png",
+        "description": "A high-quality 2D game effect sprite of an explosion end-cap pointing upward, rendered in cute chibi pixel art style. Orthogonal top-down view, completely flat 2D sprite. The flame occupies ~85% height and is anchored at the bottom center, with a rounded base and a pointed top tip. Bold black outline. Flat color bands: yellow core centered, orange mid, red outer. The tip ends about 3 pixels below the top edge. No gradients, no shadows, no lighting effects. Isolated on solid white background (#FFFFFF).",
+        "size": "32\u00d732",
+        "yield_from": null,
+        "is_background": false
+    },
+    {
+        "name": "explosion_end_down_32.png",
+        "description": "This is a partial image edit. Keep everything identical: same end-cap flame shape proportions, same palette, bold black outlines, flat colors, identical 32\u00d732 bounding box, solid white background (#FFFFFF).\n\nThe only change: the end-cap points downward. The pointed tip is now at the bottom center, and the rounded base is at the top center. The tip ends about 3 pixels above the bottom edge.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "explosion_end_up_32.png",
+        "is_background": false
+    },
+    {
+        "name": "explosion_end_left_32.png",
+        "description": "This is a partial image edit. Keep everything identical: same end-cap flame silhouette and palette, bold outlines, flat colors, identical 32\u00d732 bounding box, solid white background (#FFFFFF).\n\nThe only change: the end-cap points left. The pointed tip is at the left center, and the rounded base is at the right center. The tip ends about 3 pixels from the left edge.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "explosion_end_up_32.png",
+        "is_background": false
+    },
+    {
+        "name": "explosion_end_right_32.png",
+        "description": "This is a partial image edit. Keep everything identical: same end-cap flame silhouette and palette, bold outlines, flat colors, identical 32\u00d732 bounding box, solid white background (#FFFFFF).\n\nThe only change: the end-cap points right. The pointed tip is at the right center, and the rounded base is at the left center. The tip ends about 3 pixels from the right edge.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "explosion_end_up_32.png",
+        "is_background": false
+    },
+    {
+        "name": "enemy_slime_idle_down_32.png",
+        "description": "A high-quality 2D game enemy sprite of a roaming slime creature, rendered in cute chibi pixel art style. Direct front view (used for facing down), completely flat 2D sprite with zero perspective depth. The slime is centered and occupies ~70% of the 32\u00d732 frame. Shape: a rounded jelly blob with a slightly scalloped bottom edge (3 small bumps). Palette: mint green body (#55D6A6) with darker green outline/shadow rim (#2E8C6B) but still flat. Bold black outline around the silhouette (1\u20132 pixels). Face: two black oval eyes spaced 6 pixels apart, and a tiny flat mouth line (2 pixels wide) in dark green. Add two small highlight spots (2\u00d72 pixels) in pale mint (#8AF0CB) on upper-left. No gradients, no shadows, no lighting effects. Isolated on solid white background (#FFFFFF).",
+        "size": "32\u00d732",
+        "yield_from": null,
+        "is_background": false
+    },
+    {
+        "name": "enemy_slime_idle_up_32.png",
+        "description": "This is a partial image edit. Keep everything identical: slime size/shape, palette, scalloped bottom edge, bold black outline, flat colors, identical 32\u00d732 bounding box and centering, solid white background (#FFFFFF).\n\nThe only change: direct back view (used for facing up). Remove the face features (eyes and mouth). Add a small back marking: a centered darker-green swirl icon (about 6\u00d76 pixels) outlined in black on the upper-middle of the slime.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "enemy_slime_idle_down_32.png",
+        "is_background": false
+    },
+    {
+        "name": "enemy_slime_idle_left_32.png",
+        "description": "This is a partial image edit. Keep everything identical: slime shape, palette, outline thickness, highlight spots style, flat colors, identical 32\u00d732 bounding box and centering, solid white background (#FFFFFF).\n\nThe only change: strict side profile facing left. Only one black oval eye is visible on the front-left side of the blob. The mouth becomes a tiny 2-pixel curve near the front edge.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "enemy_slime_idle_down_32.png",
+        "is_background": false
+    },
+    {
+        "name": "enemy_slime_idle_right_32.png",
+        "description": "This is a partial image edit. Keep everything identical: slime shape, palette, outline thickness, highlight style, flat colors, identical 32\u00d732 bounding box and centering, solid white background (#FFFFFF).\n\nThe only change: strict side profile facing right. Only one black oval eye is visible on the front-right side of the blob. The mouth is a tiny 2-pixel curve near the front edge.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "enemy_slime_idle_down_32.png",
+        "is_background": false
+    },
+    {
+        "name": "enemy_slime_squash_32.png",
+        "description": "This is a partial image edit. Keep everything identical: cute chibi pixel art style, slime palette and outline, face style (use facing-down face from reference), flat colors, solid white background (#FFFFFF), identical 32\u00d732 bounding box and centering.\n\nThe only change: the slime is in a squash animation frame: overall height reduced by ~4 pixels and width increased by ~4 pixels while staying centered. The bottom scallops become slightly wider, and the eyes move 1 pixel downward to remain on the face.\n\nDo NOT change anything else in the image.",
+        "size": "32\u00d732",
+        "yield_from": "enemy_slime_idle_down_32.png",
+        "is_background": false
+    },
+    {
+        "name": "powerup_extra_bomb_32.png",
+        "description": "A high-quality 2D game power-up icon sprite for Extra Bomb, rendered in cute chibi pixel art style. Orthogonal top-down view, completely flat 2D sprite. Centered and occupying ~75% of the 32\u00d732 frame. Depict a small red gift-like tile icon: a rounded square badge in bright red (#E24A3A) with bold black outline, with a black bomb symbol in the center (tiny circular bomb with fuse). Add a bright yellow plus sign \u201c+\u201d in the top-right corner of the badge (plus is about 7\u00d77 pixels, outlined in black). Flat colors, no gradients, no shadows or lighting effects. Isolated on a solid white background (#FFFFFF).",
+        "size": "32\u00d732",
+        "yield_from": null,
+        "is_background": false
+    },
+    {
+        "name": "powerup_range_32.png",
+        "description": "A high-quality 2D game power-up icon sprite for Increased Range, rendered in cute chibi pixel art style. Orthogonal top-down view, completely flat 2D sprite. Centered and occupying ~75% of the 32\u00d732 frame. Depict a rounded square badge in orange (#FF9B3D) with bold black outline. In the center, show a stylized explosion cross icon: a small yellow starburst center with short arms extending up/down/left/right by 3\u20134 pixels, outlined in black. Add a bright yellow plus sign \u201c+\u201d in the top-right corner (7\u00d77 pixels) outlined in black. Flat colors, no gradients, no shadows or lighting. Isolated on solid white background (#FFFFFF).",
+        "size": "32\u00d732",
+        "yield_from": null,
+        "is_background": false
+    },
+    {
+        "name": "powerup_speed_32.png",
+        "description": "A high-quality 2D game power-up icon sprite for Speed Boost, rendered in cute chibi pixel art style. Orthogonal top-down view, completely flat 2D sprite. Centered and occupying ~75% of the 32\u00d732 frame. Depict a rounded square badge in sky blue (#4DB7FF) with bold black outline. In the center, show a white wing icon or speed lines: three horizontal white streaks (each 8\u201310 pixels long) stacked with 2 pixels vertical spacing, each outlined in black on the top edge to keep readability. Add a bright yellow plus sign \u201c+\u201d in the top-right corner (7\u00d77 pixels) outlined in black. Flat colors, no gradients, no shadows or lighting. Isolated on solid white background (#FFFFFF).",
+        "size": "32\u00d732",
+        "yield_from": null,
+        "is_background": false
+    },
+    {
+        "name": "ui_title_bomberman_256x96.png",
+        "description": "A high-quality 2D UI title asset showing the text \"BOMBERMAN\" in cute chibi pixel art style. Direct front view, completely flat 2D graphic with zero perspective depth. The word is centered and occupies ~85% of the width and ~70% of the height. Lettering: thick, rounded block pixel letters with bold black outlines (2\u20133 pixels). Fill each letter with a cheerful gradient-free flat scheme: alternating cyan (#4DB7FF) and pink (#E24A6A) letters, with a small 1\u20132 pixel white inner highlight stripe near the top-left of each letter (still flat). Add a simple bomb icon replacing the letter \"O\": a small black round bomb with a tiny yellow spark. No shadows, no glow, no lighting effects. Isolated on a solid white background (#FFFFFF).",
+        "size": "256\u00d796",
+        "yield_from": null,
+        "is_background": false
+    },
+    {
+        "name": "ui_button_start_160x48.png",
+        "description": "A high-quality 2D UI button asset labeled \"START GAME\", rendered in cute chibi pixel art style. Direct front view, completely flat 2D graphic. A rounded rectangle button centered in the frame, occupying ~85% width and ~70% height. Button base fill: bright green (#55D6A6) with a darker green inner border (#2E8C6B) inset by 2 pixels, and a bold black outer outline (2 pixels). Text: \"START GAME\" in white (#FFFFFF) with a 2-pixel black outline, blocky pixel font, horizontally centered and vertically centered. No shadows, no lighting effects, no depth of field. Background is solid pure white (#FFFFFF).",
+        "size": "160\u00d748",
+        "yield_from": null,
+        "is_background": false
+    },
+    {
+        "name": "ui_hud_score_label_128x32.png",
+        "description": "A high-quality 2D UI HUD label asset reading \"SCORE\" in cute chibi pixel art style. Direct front view, completely flat 2D graphic. The text is left-aligned within the frame, occupying ~70% width and ~60% height. Font: bold blocky pixel letters with 2-pixel black outline; fill color bright yellow (#FFE45C). No shadows, no lighting effects. Solid white background (#FFFFFF).",
+        "size": "128\u00d732",
+        "yield_from": null,
+        "is_background": false
+    },
+    {
+        "name": "ui_panel_score_256x48.png",
+        "description": "A high-quality 2D UI HUD panel for displaying the score number (digits drawn by the game), rendered in cute chibi pixel art style. Direct front view, completely flat 2D graphic. A rounded rectangle panel centered, occupying ~90% width and ~75% height. Panel fill: very light gray-blue (#E6EEF7) with a darker blue border (#7E8FA6) inset by 2 pixels and a bold black outer outline (2 pixels). Leave the center area empty (no text), sized to fit 6 digits at 24px-tall pixel font. No shadows, no lighting effects. Solid white background (#FFFFFF).",
+        "size": "256\u00d748",
+        "yield_from": null,
+        "is_background": false
+    },
+    {
+        "name": "ui_game_over_256x96.png",
+        "description": "A high-quality 2D UI screen label reading \"GAME OVER\" in cute chibi pixel art style. Direct front view, completely flat 2D graphic. The text is centered and occupies ~90% width and ~60% height. Font: thick, rounded block pixel letters with bold black outlines (3 pixels). Fill: strong red (#E24A3A) with a flat inner accent stripe in lighter red (#FF6A5A) near the top-left of each letter (no gradients). No glow, no shadows, no lighting effects. Solid white background (#FFFFFF).",
+        "size": "256\u00d796",
+        "yield_from": null,
+        "is_background": false
+    },
+    {
+        "name": "ui_victory_256x96.png",
+        "description": "A high-quality 2D UI screen label reading \"VICTORY!\" in cute chibi pixel art style. Direct front view, completely flat 2D graphic. The text is centered and occupies ~90% width and ~60% height. Font: thick rounded pixel letters with bold black outlines (3 pixels). Fill: bright gold-yellow (#FFE45C) with a flat orange accent stripe (#FFB03D) near the top-left of each letter. Add two small confetti triangles (each ~6\u00d76 pixels) near the top-left and top-right corners in pink and cyan, outlined in black. No shadows, no lighting effects. Solid white background (#FFFFFF).",
+        "size": "256\u00d796",
+        "yield_from": null,
+        "is_background": false
+    },
+    {
+        "name": "ui_button_menu_160x48.png",
+        "description": "A high-quality 2D UI button asset labeled \"MENU\", rendered in cute chibi pixel art style. Direct front view, completely flat 2D graphic. Rounded rectangle button centered, occupying ~70% width and ~70% height. Fill: medium blue (#4DB7FF) with darker blue inner border (#2E6BE6) inset by 2 pixels and bold black outer outline (2 pixels). Text: \"MENU\" in white with 2-pixel black outline, centered. No shadows, no lighting effects. Solid white background (#FFFFFF).",
+        "size": "160\u00d748",
+        "yield_from": null,
+        "is_background": false
+    },
+    {
+        "name": "ui_button_restart_160x48.png",
+        "description": "A high-quality 2D UI button asset labeled \"RESTART\", rendered in cute chibi pixel art style. Direct front view, completely flat 2D graphic. Rounded rectangle button centered, occupying ~80% width and ~70% height. Fill: orange (#FF9B3D) with darker orange inner border (#D9791F) inset by 2 pixels and bold black outer outline (2 pixels). Text: \"RESTART\" in white with 2-pixel black outline, centered. No shadows, no lighting effects. Solid white background (#FFFFFF).",
+        "size": "160\u00d748",
+        "yield_from": null,
+        "is_background": false
+    },
+    {
+        "name": "tilemap_level1_example_512x512.png",
+        "description": "A complete level background tilemap mockup for Level 1, rendered in cute chibi pixel art style. Orthogonal top-down view, zero perspective depth, completely flat 2D tilemap. The map is a 16\u00d716 grid of 32\u00d732 tiles (total 512\u00d7512). Use only the three tile visuals defined by the tileset assets: empty floor (warm beige), indestructible wall (cool gray-blue bricks), destructible wall (warm orange-brown crate/wood). Composition requirements: (1) Outer border is a continuous ring of indestructible wall tiles on all edges. (2) Interior indestructible walls form a readable maze pattern with evenly spaced pillars: place indestructible wall blocks at every other tile in a checker-like pillar arrangement (classic Bomberman feel), ensuring lanes and corners. (3) Destructible walls populate many corridor spaces but leave a safe spawn pocket: top-left corner spawn area is open floor for a 3\u00d73 region (tiles (1..3,1..3) in grid coordinates excluding border), and additionally keep the adjacent right and down corridor tiles clear for immediate movement. (4) Ensure at least 3 distinct open lanes connecting across the map, with choke points and corners; destructible walls should create breakable pathways but not fully seal off large regions. Color scheme must remain consistent: floors warm and clean, indestructible walls cool and sturdy, destructible walls warm and breakable. Technical: crisp pixel edges, no gradients, no shadows or lighting effects. The entire canvas is filled by the tilemap; no extra background.",
+        "size": "512\u00d7512",
+        "yield_from": null,
+        "is_background": true
+    }
+]

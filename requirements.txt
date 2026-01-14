@@ -1,0 +1,8 @@
+openai
+python-dotenv
+aiohttp
+numpy
+pillow
+opencv-python
+onnxruntime
+rembg

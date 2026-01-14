@@ -1,0 +1,65 @@
+# Test Configuration for Game Helper Python
+
+# API Configuration (for mocked tests)
+api:
+  gemini:
+    mock_enabled: true
+    mock_response_time: 0.5  # seconds
+    api_key: "test-gemini-key"
+
+  doubao:
+    mock_enabled: true
+    mock_response_time: 0.5
+    api_key: "test-doubao-key"
+
+  openai:
+    mock_enabled: true
+    mock_response_time: 1.0
+    api_key: "test-openai-key"
+    model: "gpt-4"
+
+# Image Generation Settings
+image:
+  test_sizes:
+    - "1024x1024"
+    - "2048x1024"
+    - "512x512"
+
+  max_concurrent: 3
+  timeout: 30  # seconds per image
+
+  # Background removal test settings
+  background_removal:
+    test_algorithms:
+      - "simple"
+      - "grabcut"
+    tolerance: 40
+    threshold: 200
+
+# Test Data Paths
+paths:
+  fixtures: "tests/fixtures"
+  sample_images: "tests/fixtures/sample_images"
+  expected_outputs: "tests/fixtures/expected_outputs"
+  temp_output: "tests/temp_output"
+
+# Performance Benchmarks
+benchmarks:
+  single_image_generation: 30  # max seconds
+  batch_3_images: 45
+  batch_5_images: 60
+  background_removal: 5
+  image_resize: 2
+
+# Test Coverage Thresholds
+coverage:
+  target: 80  # percentage
+  fail_under: 60
+
+# Integration Test Settings
+integration:
+  run_slow_tests: false  # Set to true for full test runs
+  use_real_api: false    # Set to true to test with real APIs (costs money!)
+
+  # Workspace for integration tests
+  workspace_dir: "tests/temp_workspace"

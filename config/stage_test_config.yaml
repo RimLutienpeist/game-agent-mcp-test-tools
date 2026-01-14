@@ -1,0 +1,444 @@
+# ========================================
+# 分阶段测试配置文件
+# Stage-by-Stage Test Configuration
+# ========================================
+
+# 工作流定义
+workflows:
+  # ==================== 工作流1: generate-game-contents ====================
+  generate-game-contents:
+    description: "完整游戏内容生成流程"
+    stages:
+      # --- 阶段1: 游戏设计生成 ---
+      stage1:
+        name: "游戏设计生成"
+        description: "根据用户创意生成完整的游戏设计文档"
+        function: "text_generation_function.generate_game_design"
+
+        input:
+          type: "text"
+          source: "user_input"  # 从命令行或配置文件读取
+          required_fields:
+            - user_input
+          example: "一个坦克大战游戏，玩家控制坦克击败敌人"
+
+        output:
+          type: "file"
+          path: "doc/game.md"
+          format: "markdown"
+          validation:
+            - check: "file_exists"
+              message: "game.md 文件未生成"
+            - check: "file_not_empty"
+              message: "game.md 文件为空"
+
+        dependencies: []
+        timeout: 30  # 秒
+        can_skip: false
+
+      # --- 阶段2: 素材清单生成 ---
+      stage2:
+        name: "素材清单生成"
+        description: "基于游戏设计生成JSON格式的素材任务列表"
+        function: "text_generation_function.generate_assets_json"
+
+        input:
+          type: "file"
+          source: "doc/game.md"
+          required_fields:
+            - game_design_content
+
+        output:
+          type: "file"
+          path: "public/tasks.json"
+          format: "json"
+          validation:
+            - check: "file_exists"
+              message: "tasks.json 文件未生成"
+            - check: "file_not_empty"
+              message: "tasks.json 文件为空"
+            - check: "valid_json"
+              message: "tasks.json 不是有效的JSON格式"
+
+        dependencies: ["stage1"]
+        timeout: 30
+        can_skip: false
+
+      # --- 阶段3: 素材文档生成 ---
+      stage3:
+        name: "素材文档生成"
+        description: "生成素材使用说明文档（Markdown格式）"
+        function: "text_generation_function.generate_assets_doc"
+
+        input:
+          type: "file"
+          source: "public/tasks.json"
+          required_fields:
+            - assets_json_content
+
+        output:
+          type: "file"
+          path: "doc/assets.md"
+          format: "markdown"
+          validation:
+            - check: "file_exists"
+              message: "assets.md 文件未生成"
+            - check: "file_not_empty"
+              message: "assets.md 文件为空"
+
+        dependencies: ["stage2"]
+        timeout: 30
+        can_skip: false
+
+      # --- 阶段4: 素材图像生成 ---
+      stage4:
+        name: "素材图像生成"
+        description: "批量生成游戏素材图像（调用 _generate_game_asset_internal）"
+        function: "_generate_game_asset_internal"
+
+        input:
+          type: "directory"
+          source: "workspace_dir"
+          required_files:
+            - "public/tasks.json"
+
+        output:
+          type: "directory"
+          path: "public/assets/"
+          validation:
+            - check: "directory_exists"
+              message: "assets 目录未创建"
+            - check: "image_count_matches"
+              reference: "public/tasks.json"
+              message: "生成的图像数量与任务数不匹配"
+
+        dependencies: ["stage2"]
+        timeout: 300  # 图像生成较慢，给5分钟
+        can_skip: false
+        options:
+          max_concurrent: 3  # 测试时降低并发
+          mock_api: true     # 默认使用Mock API
+
+      # --- 阶段5: TODO列表生成 ---
+      stage5:
+        name: "TODO列表生成"
+        description: "生成实现步骤的TODO列表"
+        function: "text_generation_function.generate_todo_list"
+
+        input:
+          type: "files"
+          sources:
+            - "doc/game.md"
+            - "doc/assets.md"
+          required_fields:
+            - game_design_content
+            - image_assets_content
+
+        output:
+          type: "files"
+          paths:
+            - "../todos.json"
+            - "../todo_summaries.json"
+          validation:
+            - check: "valid_json"
+              files: ["../todos.json", "../todo_summaries.json"]
+              message: "TODO文件不是有效的JSON格式"
+            - check: "todos_structure"
+              required_fields: ["todos"]
+              message: "todos.json 缺少 todos 数组"
+            - check: "has_test_step"
+              keyword: "playwright"
+              message: "TODO列表缺少测试步骤"
+
+        dependencies: ["stage1", "stage3"]
+        timeout: 30
+        can_skip: false
+
+  # ==================== 工作流2: generate-game-asset ====================
+  generate-game-asset:
+    description: "批量素材生成工具（独立调用）"
+    stages:
+      # --- 阶段1: 任务加载与过滤 ---
+      stage1:
+        name: "任务加载与过滤"
+        description: "从 tasks.json 读取并过滤需要生成的任务"
+        function: "_load_and_filter_tasks"
+
+        input:
+          type: "file"
+          source: "public/tasks.json"
+          required_fields:
+            - tasks_data
+
+        output:
+          type: "memory"
+          variable: "valid_tasks"
+          validation:
+            - check: "is_list"
+              message: "valid_tasks 应该是列表"
+            - check: "all_have_description"
+              message: "某些任务缺少 description 字段"
+            - check: "needs_generation_filter"
+              message: "过滤逻辑错误，包含了不需要生成的任务"
+
+        dependencies: []
+        timeout: 5
+        can_skip: false
+
+      # --- 阶段2: 依赖分析与分批 ---
+      stage2:
+        name: "依赖分析与分批"
+        description: "使用拓扑排序处理 yield_from 依赖关系"
+        function: "build_dependency_batches"
+
+        input:
+          type: "memory"
+          source: "valid_tasks"
+
+        output:
+          type: "memory"
+          variable: "batches"
+          validation:
+            - check: "is_list_of_lists"
+              message: "batches 应该是二维列表"
+            - check: "no_circular_dependency"
+              message: "检测到循环依赖"
+            - check: "dependencies_resolved"
+              message: "依赖关系未正确解决"
+            - check: "batch_order_correct"
+              message: "批次顺序错误，依赖的任务应在前面的批次"
+
+        dependencies: ["stage1"]
+        timeout: 5
+        can_skip: false
+
+      # --- 阶段3: 并发图像生成 ---
+      stage3:
+        name: "并发图像生成"
+        description: "异步并发调用API生成图像"
+        function: "generate_images_async"
+
+        input:
+          type: "memory"
+          source: "batches"
+
+        output:
+          type: "files"
+          path: "public/assets/*.png"
+          validation:
+            - check: "all_images_downloaded"
+              message: "某些图像下载失败"
+            - check: "image_format_valid"
+              message: "下载的文件不是有效的图像"
+            - check: "api_calls_successful"
+              min_success_rate: 0.8  # 至少80%成功
+              message: "API调用成功率过低"
+
+        dependencies: ["stage2"]
+        timeout: 300
+        can_skip: false
+        options:
+          max_concurrent: 2
+          mock_api: true
+
+      # --- 阶段4: 图像后处理 ---
+      stage4:
+        name: "图像后处理"
+        description: "背景移除、图像缩放、保存原图"
+        function: "_post_process_images"
+
+        input:
+          type: "directory"
+          source: "public/assets/"
+
+        output:
+          type: "directory"
+          path: "public/assets/"
+          validation:
+            - check: "background_removed"
+              skip_categories: ["background"]
+              message: "背景移除失败"
+            - check: "images_resized"
+              message: "图像缩放失败"
+            - check: "originals_preserved"
+              path: "public/assets/_originals/"
+              message: "原图未保存"
+            - check: "transparent_png"
+              check_alpha_channel: true
+              message: "非背景素材应该有透明通道"
+
+        dependencies: ["stage3"]
+        timeout: 120
+        can_skip: false
+
+      # --- 阶段5: 元数据更新 ---
+      stage5:
+        name: "元数据更新"
+        description: "检查实际图像尺寸并更新 tasks.json"
+        function: "_update_metadata"
+
+        input:
+          type: "files"
+          sources:
+            - "public/assets/*.png"
+            - "public/tasks.json"
+
+        output:
+          type: "file"
+          path: "public/tasks.json"
+          validation:
+            - check: "sizes_updated"
+              message: "tasks.json 中的尺寸未更新"
+            - check: "sizes_accurate"
+              tolerance: 5
+              message: "记录的尺寸与实际尺寸不符"
+
+        dependencies: ["stage4"]
+        timeout: 10
+        can_skip: true  # 这一步失败不影响核心功能
+
+  # ==================== 工作流3: add-game-asset ====================
+  add-game-asset:
+    description: "动态添加单个素材"
+    stages:
+      stage1:
+        name: "素材元数据生成"
+        description: "使用LLM生成素材的完整元数据"
+        function: "generate_single_asset_metadata"
+
+        input:
+          type: "text"
+          required_fields:
+            - asset_description
+            - target_size
+          optional_fields:
+            - reference_image
+            - existing_assets_doc
+
+        output:
+          type: "memory"
+          variable: "asset_data"
+          format: "json"
+          validation:
+            - check: "valid_json"
+              message: "生成的元数据不是有效JSON"
+            - check: "has_required_fields"
+              fields: ["name", "description", "size"]
+              message: "元数据缺少必填字段"
+
+        dependencies: []
+        timeout: 20
+        can_skip: false
+
+      stage2:
+        name: "任务添加"
+        description: "将新素材添加到 tasks.json"
+        function: "_append_to_tasks"
+
+        input:
+          type: "memory"
+          source: "asset_data"
+
+        output:
+          type: "file"
+          path: "public/tasks.json"
+          validation:
+            - check: "valid_json"
+              message: "更新后的 tasks.json 格式错误"
+            - check: "new_task_added"
+              message: "新任务未成功添加"
+
+        dependencies: ["stage1"]
+        timeout: 5
+        can_skip: false
+
+      stage3:
+        name: "图像生成"
+        description: "生成单个素材图像"
+        function: "_generate_game_asset_internal"
+
+        input:
+          type: "directory"
+          source: "workspace_dir"
+
+        output:
+          type: "file"
+          path: "public/assets/{asset_name}"
+          validation:
+            - check: "file_exists"
+              message: "素材图像未生成"
+            - check: "image_valid"
+              message: "生成的文件不是有效图像"
+
+        dependencies: ["stage2"]
+        timeout: 60
+        can_skip: false
+        options:
+          max_concurrent: 1
+
+      stage4:
+        name: "文档更新"
+        description: "追加素材说明到 assets.md"
+        function: "generate_single_asset_doc"
+
+        input:
+          type: "memory"
+          source: "asset_data"
+
+        output:
+          type: "file"
+          path: "doc/assets.md"
+          append: true
+          validation:
+            - check: "new_entry_added"
+              message: "新素材说明未添加到文档"
+
+        dependencies: ["stage3"]
+        timeout: 10
+        can_skip: true
+
+# ========================================
+# 全局测试配置
+# ========================================
+global:
+  workspace_base: "test/temp_workspace"
+  cleanup_after_test: false  # 测试后是否清理临时文件（调试时建议false）
+  stop_on_error: true        # 某阶段失败是否停止后续阶段
+  verbose: true              # 详细输出
+
+  # Mock配置
+  mock:
+    enabled: true
+    llm_responses: "test/fixtures/mock_responses/"
+    api_delay: 0.5  # 模拟API延迟（秒）
+
+  # 验证器配置
+  validators:
+    size_tolerance: 10      # 图像尺寸容差（像素）
+    min_success_rate: 0.8   # 最小成功率
+
+# ========================================
+# 预设测试场景
+# ========================================
+test_scenarios:
+  # 快速测试：只测试关键阶段
+  quick:
+    workflows: ["generate-game-contents"]
+    stages: ["stage1", "stage2", "stage3"]  # 跳过图像生成和TODO
+    mock: true
+    timeout_multiplier: 0.5
+
+  # 完整测试：测试所有阶段
+  full:
+    workflows: ["generate-game-contents", "generate-game-asset", "add-game-asset"]
+    stages: "all"
+    mock: true
+    timeout_multiplier: 1.0
+
+  # 真实API测试（谨慎使用，会产生费用）
+  real_api:
+    workflows: ["generate-game-contents"]
+    stages: "all"
+    mock: false
+    timeout_multiplier: 3.0
+    max_concurrent: 2
